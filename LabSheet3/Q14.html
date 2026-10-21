@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON Exception Handling</title>
+</head>
+<body>
+    <h2>JSON Parsing Example</h2>
+
+    <input type="text" id="jsonInput"
+           value='{"name":"Rahul","age":20}'
+           style="width:300px">
+    <button onclick="parseJSON()">Parse JSON</button>
+
+    <pre id="result"></pre>
+
+    <script>
+        function parseJSON() {
+            let input = document.getElementById("jsonInput").value;
+            let result = document.getElementById("result");
+
+            try {
+                let data = JSON.parse(input);
+                result.textContent =
+                    "Name: " + data.name + "\nAge: " + data.age;
+            } catch (error) {
+                result.textContent = "Error: Invalid JSON format!";
+            } finally {
+                console.log("JSON parsing operation completed.");
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vowel Counter</title>
+</head>
+<body>
+    <h2>Vowel Counter</h2>
+
+    <textarea id="paragraph" rows="5" cols="40"
+              placeholder="Enter a paragraph"></textarea>
+    <br>
+    <button onclick="countVowels()">Count Vowels</button>
+
+    <p id="result"></p>
+
+    <script>
+        function countVowels() {
+            let text = document.getElementById("paragraph").value;
+            let matches = text.match(/[aeiou]/gi);
+            let count = matches ? matches.length : 0;
+
+            document.getElementById("result").textContent =
+                "Total number of vowels: " + count;
+        }
+    </script>
+</body>
+</html>
+

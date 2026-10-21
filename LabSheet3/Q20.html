@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table Generator</title>
+</head>
+<body>
+    <h2>Dynamic Table Generator</h2>
+
+    Rows:
+    <input type="number" id="rows" min="1" value="3"><br><br>
+
+    Columns:
+    <input type="number" id="cols" min="1" value="3"><br><br>
+
+    <button onclick="generateTable()">Generate Table</button>
+
+    <div id="tableContainer"></div>
+
+    <script>
+        function generateTable() {
+            let rows = parseInt(document.getElementById("rows").value);
+            let cols = parseInt(document.getElementById("cols").value);
+
+            if (!Number.isInteger(rows) || !Number.isInteger(cols) ||
+                rows < 1 || cols < 1) {
+                alert("Enter valid row and column counts.");
+                return;
+            }
+
+            let table = document.createElement("table");
+            table.border = "1";
+
+            for (let i = 0; i < rows; i++) {
+                let tr = document.createElement("tr");
+
+                for (let j = 0; j < cols; j++) {
+                    let td = document.createElement("td");
+                    td.textContent = "Row " + (i + 1) +
+                                     ", Col " + (j + 1);
+                    tr.appendChild(td);
+                }
+
+                table.appendChild(tr);
+            }
+
+            let container = document.getElementById("tableContainer");
+            container.replaceChildren(table);
+        }
+    </script>
+</body>
+</html>
+

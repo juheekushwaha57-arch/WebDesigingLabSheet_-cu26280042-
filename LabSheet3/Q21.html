@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Callback and Asynchronous JavaScript</title>
+</head>
+<body>
+    <h2>Callback Function Example</h2>
+    <p id="output"></p>
+
+    <script>
+        function greet(name, callback) {
+            document.getElementById("output").innerHTML +=
+                "Hello, " + name + "!<br>";
+
+            callback();
+        }
+
+        function message() {
+            document.getElementById("output").innerHTML +=
+                "This is a callback function.<br>";
+        }
+
+        greet("Student", message);
+
+        document.getElementById("output").innerHTML +=
+            "Before setTimeout()<br>";
+
+        setTimeout(function() {
+            document.getElementById("output").innerHTML +=
+                "This message appears after 2 seconds.<br>";
+        }, 2000);
+
+        document.getElementById("output").innerHTML +=
+            "After setTimeout()";
+    </script>
+</body>
+</html>
+

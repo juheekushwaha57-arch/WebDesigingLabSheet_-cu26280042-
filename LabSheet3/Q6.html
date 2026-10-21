@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array Methods</title>
+</head>
+<body>
+    <h2>Array Manipulation</h2>
+    <p id="result"></p>
+
+    <script>
+        let numbers = [10, 5, 30, 15, 20];
+
+        numbers.push(25);
+        console.log("After push:", numbers);
+
+        numbers.pop();
+        console.log("After pop:", numbers);
+
+        let sorted = [...numbers].sort((a, b) => a - b);
+        console.log("Sorted:", sorted);
+
+        let doubled = numbers.map(n => n * 2);
+        console.log("Doubled:", doubled);
+
+        let filtered = numbers.filter(n => n > 10);
+        console.log("Numbers greater than 10:", filtered);
+
+        document.getElementById("result").innerHTML =
+            "Original: " + numbers.join(", ") + "<br>" +
+            "Sorted: " + sorted.join(", ") + "<br>" +
+            "Doubled: " + doubled.join(", ") + "<br>" +
+            "Greater than 10: " + filtered.join(", ");
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Object</title>
+</head>
+<body>
+    <h2>Student Details</h2>
+    <p id="result"></p>
+
+    <script>
+        let student = {
+            name: "Rahul",
+            rollNo: 101,
+            marks: 85,
+
+            displayDetails: function() {
+                return "Name: " + this.name +
+                       "<br>Roll Number: " + this.rollNo +
+                       "<br>Marks: " + this.marks;
+            },
+
+            checkResult: function() {
+                return this.marks >= 40 ? "Pass" : "Fail";
+            }
+        };
+
+        document.getElementById("result").innerHTML =
+            student.displayDetails() +
+            "<br>Result: " + student.checkResult();
+    </script>
+</body>
+</html>
+

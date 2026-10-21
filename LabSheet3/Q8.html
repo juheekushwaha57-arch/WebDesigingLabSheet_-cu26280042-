@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        button { margin: 5px; padding: 10px 15px; }
+        input { padding: 8px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Calculator</h2>
+
+    <input type="number" id="a" placeholder="First number">
+    <input type="number" id="b" placeholder="Second number">
+    <br>
+
+    <button data-op="+">+</button>
+    <button data-op="-">-</button>
+    <button data-op="*">*</button>
+    <button data-op="/">/</button>
+
+    <p id="result">Result will appear here.</p>
+
+    <script>
+        document.querySelectorAll("button").forEach(button => {
+            button.addEventListener("click", function() {
+                let a = Number(document.getElementById("a").value);
+                let b = Number(document.getElementById("b").value);
+                let op = this.dataset.op;
+                let result;
+
+                if (document.getElementById("a").value === "" ||
+                    document.getElementById("b").value === "") {
+                    result = "Please enter both numbers.";
+                } else {
+                    switch (op) {
+                        case "+": result = a + b; break;
+                        case "-": result = a - b; break;
+                        case "*": result = a * b; break;
+                        case "/":
+                            result = b !== 0 ? a / b : "Cannot divide by zero";
+                            break;
+                    }
+                }
+
+                document.getElementById("result").textContent =
+                    "Result: " + result;
+            });
+        });
+    </script>
+</body>
+</html>
+

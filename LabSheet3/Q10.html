@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Validation</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        input { display: block; margin: 10px 0; padding: 8px; }
+        #message { font-size: 14px; }
+    </style>
+</head>
+<body>
+    <h2>Registration Form</h2>
+
+    <form id="registration">
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+
+        <label for="confirm">Confirm Password:</label>
+        <input type="password" id="confirm" required>
+
+        <p id="message" aria-live="polite"></p>
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        let password = document.getElementById("password");
+        let confirm = document.getElementById("confirm");
+        let message = document.getElementById("message");
+        let form = document.getElementById("registration");
+
+        function validatePassword() {
+            if (confirm.value === "") {
+                message.textContent = "";
+                confirm.setCustomValidity("");
+            } else if (password.value === confirm.value) {
+                message.textContent = "Passwords match.";
+                message.style.color = "green";
+                confirm.setCustomValidity("");
+            } else {
+                message.textContent = "Passwords do not match.";
+                message.style.color = "red";
+                confirm.setCustomValidity("Passwords do not match.");
+            }
+        }
+
+        password.addEventListener("input", validatePassword);
+        confirm.addEventListener("input", validatePassword);
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            validatePassword();
+
+            if (form.checkValidity()) {
+                alert("Registration successful!");
+            } else {
+                form.reportValidity();
+            }
+        });
+    </script>
+</body>
+</html>
+

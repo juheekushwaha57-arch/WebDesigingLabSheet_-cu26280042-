@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Gallery Slider</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        img {
+            width: 400px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            max-width: 90%;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Image Gallery</h2>
+
+    <img id="gallery" src="https://picsum.photos/id/10/600/400"
+         alt="Gallery image">
+    <p id="counter"></p>
+
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+
+    <script>
+        const images = [
+            "https://picsum.photos/id/10/600/400",
+            "https://picsum.photos/id/20/600/400",
+            "https://picsum.photos/id/30/600/400",
+            "https://picsum.photos/id/40/600/400"
+        ];
+
+        let index = 0;
+        const gallery = document.getElementById("gallery");
+        const counter = document.getElementById("counter");
+
+        function showImage() {
+            gallery.src = images[index];
+            counter.textContent =
+                `Image ${index + 1} of ${images.length}`;
+        }
+
+        document.getElementById("next").addEventListener("click", function() {
+            index = (index + 1) % images.length;
+            showImage();
+        });
+
+        document.getElementById("prev").addEventListener("click", function() {
+            index = (index - 1 + images.length) % images.length;
+            showImage();
+        });
+
+        showImage();
+    </script>
+</body>
+</html>
+
