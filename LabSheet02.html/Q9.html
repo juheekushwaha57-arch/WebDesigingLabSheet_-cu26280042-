@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Survey Form</title>
+
+    <style>
+        /* Basic reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Page styling */
+        body {
+            min-height: 100vh;
+            background: #f1f5f9;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+        }
+
+        /* Main form container */
+        .survey-container {
+            width: 100%;
+            max-width: 650px;
+
+            background: #ffffff;
+
+            padding: 30px;
+            margin: 20px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading */
+        h1 {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .intro {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        /* Fieldset styling */
+        fieldset {
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+
+            padding: 25px;
+            margin-bottom: 25px;
+
+            background-color: #f8fafc;
+        }
+
+        /* Legend styling */
+        legend {
+            padding: 8px 15px;
+            margin-left: 10px;
+
+            background-color: #2563eb;
+            color: white;
+
+            border-radius: 6px;
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Form groups */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Labels */
+        label {
+            display: block;
+            margin-bottom: 8px;
+
+            color: #334155;
+            font-weight: bold;
+        }
+
+        /* Text input and select */
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+
+            background-color: white;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition:
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+        }
+
+        /* Focus effect */
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+        }
+
+        /* Radio and checkbox groups */
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 10px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.3s ease,
+                padding-left 0.3s ease;
+        }
+
+        .option:hover {
+            background-color: #e0f2fe;
+            padding-left: 15px;
+        }
+
+        .option input {
+            width: 18px;
+            height: 18px;
+
+            accent-color: #2563eb;
+
+            cursor: pointer;
+        }
+
+        .option label {
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        /* Textarea */
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Submit button */
+        .submit-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 7px;
+
+            background-color: #2563eb;
+            color: white;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            background-color: #1e40af;
+            transform: translateY(1px);
+        }
+
+        /* Success message */
+        #successMessage {
+            display: none;
+
+            margin-top: 20px;
+            padding: 12px;
+
+            border-radius: 6px;
+
+            background-color: #dcfce7;
+            color: #166534;
+
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            .survey-container {
+                padding: 20px;
+                margin: 0;
+            }
+
+            fieldset {
+                padding: 18px;
+            }
+
+            legend {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="survey-container">
+
+        <h1>Customer Survey</h1>
+
+        <p class="intro">
+            Please take a few minutes to tell us about your experience.
+        </p>
+
+        <form id="surveyForm">
+
+            <!-- Personal Information -->
+            <fieldset>
+
+                <legend>Personal Information</legend>
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+            </fieldset>
+
+
+            <!-- Experience -->
+            <fieldset>
+
+                <legend>Your Experience</legend>
+
+                <div class="form-group">
+
+                    <label>
+                        How satisfied are you?
+                    </label>
+
+                    <div class="option-group">
+
+                        <div class="option">
+                            <input
+                                type="radio"
+                                id="excellent"
+                                name="satisfaction"
+                                value="Excellent"
+                                required
+                            >
+
+                            <label for="excellent">
+                                Excellent
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input
+                                type="radio"
+                                id="good"
+                                name="satisfaction"
+                                value="Good"
+                            >
+
+                            <label for="good">
+                                Good
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input
+                                type="radio"
+                                id="average"
+                                name="satisfaction"
+                                value="Average"
+                            >
+
+                            <label for="average">
+                                Average
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input
+                                type="radio"
+                                id="poor"
+                                name="satisfaction"
+                                value="Poor"
+                            >
+
+                            <label for="poor">
+                                Poor
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Which features did you use?
+                    </label>
+
+                    <div class="option-group">
+
+                        <div class="option">
+                            <input
+                                type="checkbox"
+                                id="feature1"
+                                name="features"
+                                value="Dashboard"
+                            >
+
+                            <label for="feature1">
+                                Dashboard
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input
+                                type="checkbox"
+                                id="feature2"
+                                name="features"
+                                value="Reports"
+                            >
+
+                            <label for="feature2">
+                                Reports
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input
+                                type="checkbox"
+                                id="feature3"
+                                name="features"
+                                value="Notifications"
+                            >
+
+                            <label for="feature3">
+                                Notifications
+                            </label>
+                        </div>
+
+                        <div class="option">
+                            <input
+                                type="checkbox"
+                                id="feature4"
+                                name="features"
+                                value="Support"
+                            >
+
+                            <label for="feature4">
+                                Customer Support
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+            </fieldset>
+
+
+            <!-- Additional Feedback -->
+            <fieldset>
+
+                <legend>Additional Feedback</legend>
+
+                <div class="form-group">
+
+                    <label for="frequency">
+                        How often do you use our service?
+                    </label>
+
+                    <select id="frequency" name="frequency" required>
+
+                        <option value="">
+                            Select an option
+                        </option>
+
+                        <option value="daily">
+                            Daily
+                        </option>
+
+                        <option value="weekly">
+                            Several times a week
+                        </option>
+
+                        <option value="monthly">
+                            Monthly
+                        </option>
+
+                        <option value="rarely">
+                            Rarely
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="comments">
+                        Additional Comments
+                    </label>
+
+                    <textarea
+                        id="comments"
+                        name="comments"
+                        placeholder="Tell us how we can improve..."
+                    ></textarea>
+
+                </div>
+
+            </fieldset>
+
+
+            <!-- Submit -->
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Submit Survey
+            </button>
+
+        </form>
+
+
+        <div id="successMessage">
+            Thank you! Your survey has been submitted successfully.
+        </div>
+
+    </div>
+
+
+    <script>
+        const form = document.getElementById("surveyForm");
+        const successMessage =
+            document.getElementById("successMessage");
+
+        form.addEventListener("submit", function(event) {
+
+            // Prevent page reload
+            event.preventDefault();
+
+            // Display success message
+            successMessage.style.display = "block";
+
+            // Reset form
+            form.reset();
+
+        });
+    </script>
+
+</body>
+</html>

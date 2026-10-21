@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Expanding Search Box</title>
+
+    <style>
+        /* =========================
+           BASIC RESET
+        ========================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================== */
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #f1f5f9;
+
+            padding: 20px;
+        }
+
+
+        /* =========================
+           SEARCH CONTAINER
+        ========================== */
+
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+
+            text-align: center;
+        }
+
+
+        .search-container h1 {
+            color: #1e293b;
+
+            margin-bottom: 10px;
+        }
+
+
+        .search-container p {
+            color: #64748b;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           SEARCH BOX
+        ========================== */
+
+        .search-box {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        /* Search input */
+
+        .search-input {
+            width: 250px;
+
+            padding: 13px 18px;
+
+            border: 2px solid #cbd5e1;
+
+            border-radius: 25px;
+
+            background-color: white;
+
+            color: #334155;
+
+            font-size: 16px;
+
+            outline: none;
+
+            /*
+             * Smoothly animate the width.
+             */
+            transition:
+                width 0.5s ease,
+                border-color 0.3s ease,
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        /*
+         * Expand the search input when focused.
+         */
+        .search-input:focus {
+            width: 450px;
+
+            border-color: #2563eb;
+
+            background-color: #eff6ff;
+
+            box-shadow:
+                0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+
+
+        /* Search button */
+
+        .search-button {
+            padding: 13px 20px;
+
+            border: none;
+
+            border-radius: 25px;
+
+            background-color: #2563eb;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease;
+        }
+
+
+        .search-button:hover {
+            background-color: #1d4ed8;
+
+            transform: translateY(-2px);
+        }
+
+
+        .search-button:active {
+            background-color: #1e40af;
+
+            transform: translateY(1px);
+        }
+
+
+        /* Search result */
+
+        #result {
+            margin-top: 25px;
+
+            padding: 15px;
+
+            color: #334155;
+
+            background-color: white;
+
+            border-radius: 8px;
+
+            display: none;
+        }
+
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            /*
+             * On small screens the focused
+             * input remains within the container.
+             */
+            .search-input:focus {
+                width: 100%;
+            }
+
+            .search-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="search-container">
+
+        <h1>Search</h1>
+
+        <p>
+            Click inside the search box to see it expand.
+        </p>
+
+
+        <form class="search-box" id="searchForm">
+
+            <input
+                type="search"
+                class="search-input"
+                id="searchInput"
+                placeholder="Search here..."
+                aria-label="Search"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="search-button"
+            >
+                Search
+            </button>
+
+        </form>
+
+
+        <div id="result"></div>
+
+    </div>
+
+
+    <script>
+        const searchForm =
+            document.getElementById("searchForm");
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const result =
+            document.getElementById("result");
+
+
+        searchForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const searchText =
+                searchInput.value.trim();
+
+            if (searchText === "") {
+                return;
+            }
+
+            result.textContent =
+                "You searched for: " + searchText;
+
+            result.style.display = "block";
+        });
+    </script>
+
+</body>
+</html>

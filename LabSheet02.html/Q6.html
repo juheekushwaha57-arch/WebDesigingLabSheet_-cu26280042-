@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grid Form</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f5f5f5;
+        }
+
+        form {
+            max-width: 700px;
+            margin: 40px auto;
+            background: hwb(168 74% 3%);
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 12px;
+            background: #007bff;
+            color: hsl(0, 31%, 94%);
+            border: none;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<form>
+
+    <div>
+        <label for="fname"><b>First Name</b></label>
+        <input id="fname" type="text">
+    </div>
+
+    <div>
+        <label for="lname"><b>Last Name</b></label>
+        <input id="lname" type="text">
+    </div>
+
+    <div>
+        <label for="email"><b>Email</b></label>
+        <input id="email" type="email">
+    </div>
+
+    <div>
+        <label for="phone"><b>Phone</b></label>
+        <input id="phone" type="tel">
+    </div>
+
+    <div class="full">
+        <label for="address"><b>Address</b></label>
+        <textarea id="address"></textarea>
+    </div>
+
+    <button class="full" type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>

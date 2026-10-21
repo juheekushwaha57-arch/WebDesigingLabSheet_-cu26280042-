@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Checkout</title>
+
+    <style>
+        /* =========================
+           BASIC RESET
+        ========================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* =========================
+           PAGE
+        ========================== */
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #eef2f7;
+
+            padding: 30px;
+        }
+
+        /* =========================
+           CHECKOUT CONTAINER
+        ========================== */
+
+        .checkout-container {
+            width: 100%;
+            max-width: 700px;
+
+            background: #ffffff;
+
+            padding: 35px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .checkout-header h1 {
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .checkout-header p {
+            color: #64748b;
+        }
+
+        /* =========================
+           FORM SECTIONS
+        ========================== */
+
+        .form-section {
+            margin-bottom: 25px;
+        }
+
+        .form-section h2 {
+            font-size: 18px;
+            color: #334155;
+
+            margin-bottom: 15px;
+
+            padding-bottom: 8px;
+
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        /* =========================
+           FORM ROW
+        ========================== */
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        /* =========================
+           LABELS
+        ========================== */
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #334155;
+
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* =========================
+           INPUTS
+        ========================== */
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 2px solid #cbd5e1;
+
+            border-radius: 6px;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition:
+                border-color 0.3s ease,
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        /* Focus effect */
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+
+            background-color: #eff6ff;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        /* =========================
+           CARD DETAILS
+        ========================== */
+
+        .card-input {
+            position: relative;
+        }
+
+        .card-input input {
+            padding-right: 60px;
+        }
+
+        .card-icon {
+            position: absolute;
+
+            right: 12px;
+            top: 38px;
+
+            color: #64748b;
+
+            font-size: 20px;
+        }
+
+        /* =========================
+           PAYMENT SUMMARY
+        ========================== */
+
+        .payment-summary {
+            background-color: #f8fafc;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            margin-bottom: 25px;
+        }
+
+        .summary-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 10px;
+
+            color: #475569;
+        }
+
+        .summary-row.total {
+            padding-top: 12px;
+
+            border-top: 1px solid #cbd5e1;
+
+            color: #1e293b;
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           PAY BUTTON
+        ========================== */
+
+        .pay-button {
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background-color: #2563eb;
+
+            color: white;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .pay-button:hover {
+            background-color: #1d4ed8;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 6px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .pay-button:active {
+            background-color: #1e40af;
+
+            transform: translateY(1px);
+        }
+
+        /* =========================
+           SECURITY MESSAGE
+        ========================== */
+
+        .security-message {
+            text-align: center;
+
+            margin-top: 15px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           SUCCESS MESSAGE
+        ========================== */
+
+        #successMessage {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border-radius: 6px;
+
+            background-color: #dcfce7;
+
+            color: #166534;
+
+            text-align: center;
+
+            font-weight: bold;
+        }
+
+        /* ========================================
+           MOBILE RESPONSIVE MEDIA QUERY
+        ========================================= */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .checkout-container {
+                padding: 20px;
+            }
+
+            /*
+             * Change two-column rows into
+             * single-column layout.
+             */
+            .form-row {
+                flex-direction: column;
+
+                gap: 0;
+            }
+
+            /*
+             * Inputs occupy the full mobile width.
+             */
+            .form-group {
+                width: 100%;
+
+                margin-bottom: 18px;
+            }
+
+            input,
+            select {
+                width: 100%;
+
+                font-size: 16px;
+
+                padding: 13px;
+            }
+
+            .checkout-header h1 {
+                font-size: 25px;
+            }
+
+            .form-section h2 {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="checkout-container">
+
+        <!-- Header -->
+        <div class="checkout-header">
+
+            <h1>Secure Checkout</h1>
+
+            <p>
+                Complete your payment details below.
+            </p>
+
+        </div>
+
+
+        <form id="paymentForm">
+
+            <!-- Billing Information -->
+            <div class="form-section">
+
+                <h2>Billing Information</h2>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="firstName">
+                            First Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="firstName"
+                            name="firstName"
+                            placeholder="John"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="lastName">
+                            Last Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                            placeholder="Doe"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="john@example.com"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="+91 98765 43210"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Payment Information -->
+            <div class="form-section">
+
+                <h2>Payment Information</h2>
+
+                <div class="form-group card-input">
+
+                    <label for="cardNumber">
+                        Card Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cardNumber"
+                        name="cardNumber"
+                        placeholder="1234 5678 9012 3456"
+                        maxlength="19"
+                        required
+                    >
+
+                    <span class="card-icon">
+                        💳
+                    </span>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="expiry">
+                            Expiry Date
+                        </label>
+
+                        <input
+                            type="text"
+                            id="expiry"
+                            name="expiry"
+                            placeholder="MM/YY"
+                            maxlength="5"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="cvv">
+                            CVV
+                        </label>
+
+                        <input
+                            type="password"
+                            id="cvv"
+                            name="cvv"
+                            placeholder="123"
+                            maxlength="4"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="country">
+                        Country
+                    </label>
+
+                    <select id="country" name="country" required>
+
+                        <option value="">
+                            Select Country
+                        </option>
+
+                        <option value="india">
+                            India
+                        </option>
+
+                        <option value="usa">
+                            United States
+                        </option>
+
+                        <option value="uk">
+                            United Kingdom
+                        </option>
+
+                        <option value="canada">
+                            Canada
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- Payment Summary -->
+            <div class="payment-summary">
+
+                <div class="summary-row">
+                    <span>Product</span>
+                    <span>₹1,999</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Tax</span>
+                    <span>₹360</span>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span>₹2,359</span>
+                </div>
+
+            </div>
+
+
+            <!-- Submit -->
+            <button
+                type="submit"
+                class="pay-button"
+            >
+                Pay ₹2,359
+            </button>
+
+
+            <p class="security-message">
+                🔒 Your payment information is securely protected.
+            </p>
+
+        </form>
+
+
+        <div id="successMessage">
+            Payment form submitted successfully!
+        </div>
+
+    </div>
+
+
+    <script>
+        const paymentForm =
+            document.getElementById("paymentForm");
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+
+        paymentForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            successMessage.style.display = "block";
+
+            paymentForm.reset();
+
+        });
+    </script>
+
+</body>
+</html>

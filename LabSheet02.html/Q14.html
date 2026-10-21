@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Range Slider Form</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #f1f5f9;
+
+            padding: 20px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e293b;
+
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+            color: #64748b;
+
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 10px;
+
+            color: #334155;
+            font-weight: bold;
+        }
+
+        /* Range slider */
+
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+
+            height: 7px;
+
+            accent-color: #2563eb;
+
+            cursor: pointer;
+        }
+
+        .range-value {
+            min-width: 70px;
+
+            padding: 8px 10px;
+
+            background-color: #eff6ff;
+
+            border-radius: 6px;
+
+            color: #2563eb;
+
+            font-weight: bold;
+
+            text-align: center;
+        }
+
+        /* Number input */
+
+        .number-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="number"] {
+            width: 150px;
+
+            padding: 12px;
+
+            border: 2px solid #cbd5e1;
+
+            border-radius: 6px;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition:
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: #2563eb;
+
+            background-color: #eff6ff;
+        }
+
+        .unit {
+            color: #475569;
+
+            font-weight: bold;
+
+            font-size: 16px;
+        }
+
+        /* Live result */
+
+        .result {
+            margin: 25px 0;
+
+            padding: 20px;
+
+            background-color: #f8fafc;
+
+            border-radius: 8px;
+
+            text-align: center;
+        }
+
+        .result p {
+            color: #64748b;
+
+            margin-bottom: 8px;
+        }
+
+        .result strong {
+            color: #2563eb;
+
+            font-size: 28px;
+        }
+
+        /* Submit button */
+
+        .submit-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background-color: #2563eb;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            background-color: #1e40af;
+
+            transform: translateY(1px);
+        }
+
+        #message {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 12px;
+
+            background-color: #dcfce7;
+
+            color: #166534;
+
+            border-radius: 6px;
+
+            text-align: center;
+
+            font-weight: bold;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 500px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            .range-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .range-value {
+                width: 100%;
+            }
+
+            input[type="number"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h1>Distance Selector</h1>
+
+        <p class="description">
+            Select a distance using the slider or enter a value.
+        </p>
+
+        <form id="distanceForm">
+
+            <!-- Range Slider -->
+            <div class="form-group">
+
+                <label for="distanceRange">
+                    Distance
+                </label>
+
+                <div class="range-container">
+
+                    <input
+                        type="range"
+                        id="distanceRange"
+                        name="distance"
+                        min="1"
+                        max="100"
+                        value="25"
+                    >
+
+                    <span
+                        class="range-value"
+                        id="rangeValue"
+                    >
+                        25 km
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Number Input -->
+            <div class="form-group">
+
+                <label for="distanceNumber">
+                    Enter Distance
+                </label>
+
+                <div class="number-container">
+
+                    <input
+                        type="number"
+                        id="distanceNumber"
+                        name="distanceNumber"
+                        min="1"
+                        max="100"
+                        value="25"
+                    >
+
+                    <span class="unit">
+                        kilometers
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Live Result -->
+            <div class="result">
+
+                <p>
+                    Selected Distance
+                </p>
+
+                <strong id="resultValue">
+                    25 km
+                </strong>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Submit
+            </button>
+
+        </form>
+
+
+        <div id="message">
+            Distance submitted successfully!
+        </div>
+
+    </div>
+
+
+    <script>
+        const range =
+            document.getElementById("distanceRange");
+
+        const number =
+            document.getElementById("distanceNumber");
+
+        const rangeValue =
+            document.getElementById("rangeValue");
+
+        const resultValue =
+            document.getElementById("resultValue");
+
+        const form =
+            document.getElementById("distanceForm");
+
+        const message =
+            document.getElementById("message");
+
+
+        /*
+         * Update all displayed values.
+         */
+        function updateDistance(value) {
+
+            let distance = Number(value);
+
+            // Keep value within allowed range
+            distance = Math.max(1, Math.min(100, distance));
+
+            range.value = distance;
+            number.value = distance;
+
+            rangeValue.textContent =
+                distance + " km";
+
+            resultValue.textContent =
+                distance + " km";
+        }
+
+
+        /*
+         * Range slider changes the number input.
+         */
+        range.addEventListener("input", function() {
+
+            updateDistance(range.value);
+
+        });
+
+
+        /*
+         * Number input changes the range slider.
+         */
+        number.addEventListener("input", function() {
+
+            if (number.value === "") {
+                return;
+            }
+
+            updateDistance(number.value);
+
+        });
+
+
+        /*
+         * Form submission.
+         */
+        form.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            message.style.display = "block";
+
+        });
+    </script>
+
+</body>
+</html>

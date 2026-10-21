@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Form</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 450px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease,
+                        background-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        /* File upload styling */
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed #94a3b8;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            cursor: pointer;
+        }
+
+        input[type="file"]:hover {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+        }
+
+        /* Custom Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 7px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+
+            /* CSS transition */
+            transition:
+                background-color 0.3s ease,
+                transform 0.15s ease,
+                box-shadow 0.3s ease;
+        }
+
+        /* Hover state */
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Active state */
+        .submit-btn:active {
+            background-color: #1e40af;
+            transform: translateY(1px);
+            box-shadow: 0 2px 5px rgba(37, 99, 235, 0.3);
+        }
+
+        #successMessage {
+            display: none;
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            background-color: #dcfce7;
+            color: #166534;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h1>Upload Form</h1>
+
+        <p class="description">
+            Please fill out the form and upload your file.
+        </p>
+
+        <form id="uploadForm">
+
+            <!-- Name -->
+            <div class="form-group">
+                <label for="name">Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+                <label for="message">Message</label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Enter your message"
+                    required
+                ></textarea>
+            </div>
+
+            <!-- File Upload -->
+            <div class="form-group">
+                <label for="file">Upload File</label>
+
+                <input
+                    type="file"
+                    id="file"
+                    name="file"
+                    accept=".jpg,.jpeg,.png,.pdf,.doc,.docx"
+                    required
+                >
+            </div>
+
+            <!-- Custom Submit Button -->
+            <button type="submit" class="submit-btn">
+                Submit Form
+            </button>
+
+        </form>
+
+        <div id="successMessage">
+            Form submitted successfully!
+        </div>
+
+    </div>
+
+    <script>
+        const form = document.getElementById("uploadForm");
+        const successMessage = document.getElementById("successMessage");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            successMessage.style.display = "block";
+
+            form.reset();
+        });
+    </script>
+
+</body>
+</html>

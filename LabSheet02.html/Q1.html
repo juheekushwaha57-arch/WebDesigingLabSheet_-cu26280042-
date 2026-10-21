@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h1>Registration Form</h1>
+
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+
+        <p>Gender:</p>
+
+        <label>
+            <input type="radio" name="gender" value="male">
+            Male
+        </label>
+
+        <label>
+            <input type="radio" name="gender" value="female">
+            Female
+        </label>
+
+        <p>Hobbies:</p>
+
+        <label>
+            <input type="checkbox" name="hobby" value="reading">
+            Reading
+        </label>
+
+        <label>
+            <input type="checkbox" name="hobby" value="sports">
+            Sports
+        </label>
+
+        <label>
+            <input type="checkbox" name="hobby" value="music">
+            Music
+        </label>
+
+        <label for="course">Course:</label>
+        <select id="course" name="course">
+            <option value="">Select Course</option>
+            <option value="bca">BCA</option>
+            <option value="btech">B.Tech</option>
+            <option value="mca">MCA</option>
+            <option value="mba">MBA</option>
+        </select>
+
+        <label for="message">Address:</label>
+        <textarea id="message" name="message" rows="5"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Data Entry Table</title>
+
+    <style>
+        /* Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Page */
+        body {
+            min-height: 100vh;
+            background-color: #f1f5f9;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+        }
+
+        /* Form container */
+        .form-container {
+            width: 100%;
+            max-width: 900px;
+
+            background-color: #ffffff;
+
+            padding: 30px;
+            margin: 20px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading */
+        h1 {
+            text-align: center;
+            color: #1e293b;
+
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+            color: #64748b;
+
+            margin-bottom: 25px;
+        }
+
+        /* Table wrapper makes table responsive */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+
+            margin-bottom: 25px;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            min-width: 650px;
+
+            border-collapse: collapse;
+
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Table header */
+        thead {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        th {
+            padding: 14px;
+
+            text-align: left;
+
+            font-size: 16px;
+
+            border: 1px solid #1d4ed8;
+        }
+
+        /* Table cells */
+        td {
+            padding: 12px;
+
+            border: 1px solid #cbd5e1;
+
+            color: #334155;
+        }
+
+        /*
+         * Alternating row colors
+         * Odd rows get a light background.
+         */
+        tbody tr:nth-child(odd) {
+            background-color: #f8fafc;
+        }
+
+        /*
+         * Even rows get a slightly different color.
+         */
+        tbody tr:nth-child(even) {
+            background-color: #e0f2fe;
+        }
+
+        /* Row hover effect */
+        tbody tr:hover {
+            background-color: #bfdbfe;
+
+            transition: background-color 0.2s ease;
+        }
+
+        /* Inputs inside table */
+        td input,
+        td select {
+            width: 100%;
+
+            padding: 9px;
+
+            border: 1px solid #94a3b8;
+            border-radius: 5px;
+
+            background-color: white;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition:
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+        }
+
+        /* Input focus effect */
+        td input:focus,
+        td select:focus {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+        }
+
+        /* Submit button */
+        .submit-btn {
+            display: block;
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 7px;
+
+            background-color: #2563eb;
+            color: white;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            background-color: #1e40af;
+            transform: translateY(1px);
+        }
+
+        /* Success message */
+        #successMessage {
+            display: none;
+
+            margin-top: 20px;
+            padding: 12px;
+
+            border-radius: 6px;
+
+            background-color: #dcfce7;
+            color: #166534;
+
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            .form-container {
+                padding: 20px;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h1>Employee Data Entry</h1>
+
+        <p class="description">
+            Enter employee information in the table below.
+        </p>
+
+        <form id="employeeForm">
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Employee Name</th>
+                            <th>Department</th>
+                            <th>Position</th>
+                            <th>Salary</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="employee1"
+                                    placeholder="Enter name"
+                                    required
+                                >
+                            </td>
+
+                            <td>
+                                <select name="department1" required>
+                                    <option value="">
+                                        Select
+                                    </option>
+
+                                    <option value="IT">
+                                        IT
+                                    </option>
+
+                                    <option value="HR">
+                                        HR
+                                    </option>
+
+                                    <option value="Finance">
+                                        Finance
+                                    </option>
+
+                                    <option value="Marketing">
+                                        Marketing
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    name="position1"
+                                    placeholder="Position"
+                                    required
+                                >
+                            </td>
+
+                            <td>
+                                <input
+                                    type="number"
+                                    name="salary1"
+                                    placeholder="Salary"
+                                    min="0"
+                                    required
+                                >
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="employee2"
+                                    placeholder="Enter name"
+                                    required
+                                >
+                            </td>
+
+                            <td>
+                                <select name="department2" required>
+                                    <option value="">
+                                        Select
+                                    </option>
+
+                                    <option value="IT">
+                                        IT
+                                    </option>
+
+                                    <option value="HR">
+                                        HR
+                                    </option>
+
+                                    <option value="Finance">
+                                        Finance
+                                    </option>
+
+                                    <option value="Marketing">
+                                        Marketing
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    name="position2"
+                                    placeholder="Position"
+                                    required
+                                >
+                            </td>
+
+                            <td>
+                                <input
+                                    type="number"
+                                    name="salary2"
+                                    placeholder="Salary"
+                                    min="0"
+                                    required
+                                >
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="employee3"
+                                    placeholder="Enter name"
+                                    required
+                                >
+                            </td>
+
+                            <td>
+                                <select name="department3" required>
+                                    <option value="">
+                                        Select
+                                    </option>
+
+                                    <option value="IT">
+                                        IT
+                                    </option>
+
+                                    <option value="HR">
+                                        HR
+                                    </option>
+
+                                    <option value="Finance">
+                                        Finance
+                                    </option>
+
+                                    <option value="Marketing">
+                                        Marketing
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    name="position3"
+                                    placeholder="Position"
+                                    required
+                                >
+                            </td>
+
+                            <td>
+                                <input
+                                    type="number"
+                                    name="salary3"
+                                    placeholder="Salary"
+                                    min="0"
+                                    required
+                                >
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <input
+                                    type="text"
+                                    name="employee4"
+                                    placeholder="Enter name"
+                                    required
+                                >
+                            </td>
+
+                            <td>
+                                <select name="department4" required>
+                                    <option value="">
+                                        Select
+                                    </option>
+
+                                    <option value="IT">
+                                        IT
+                                    </option>
+
+                                    <option value="HR">
+                                        HR
+                                    </option>
+
+                                    <option value="Finance">
+                                        Finance
+                                    </option>
+
+                                    <option value="Marketing">
+                                        Marketing
+                                    </option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    name="position4"
+                                    placeholder="Position"
+                                    required
+                                >
+                            </td>
+
+                            <td>
+                                <input
+                                    type="number"
+                                    name="salary4"
+                                    placeholder="Salary"
+                                    min="0"
+                                    required
+                                >
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Submit Data
+            </button>
+
+        </form>
+
+        <div id="successMessage">
+            Employee data submitted successfully!
+        </div>
+
+    </div>
+
+
+    <script>
+        const form = document.getElementById("employeeForm");
+        const successMessage =
+            document.getElementById("successMessage");
+
+        form.addEventListener("submit", function(event) {
+
+            // Prevent page refresh
+            event.preventDefault();
+
+            // Display success message
+            successMessage.style.display = "block";
+
+            // Reset the form
+            form.reset();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Newsletter Subscription</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .newsletter {
+            width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: white;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        .newsletter h2 {
+            color: #333;
+        }
+
+        /* Container for input and floating label */
+        .input-box {
+            position: relative;
+            margin: 30px 0;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 12px 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Label position */
+        .input-box label {
+            position: absolute;
+            left: 10px;
+            top: 13px;
+            color: #777;
+            background-color: white;
+            padding: 0 5px;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        /* Floating label effect */
+        .input-box input:focus + label,
+        .input-box input:valid + label {
+            top: -10px;
+            font-size: 13px;
+            color: #007bff;
+        }
+
+        .newsletter button {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .newsletter button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="newsletter">
+
+        <h2>Subscribe to Our Newsletter</h2>
+
+        <p>Get the latest updates directly in your inbox.</p>
+
+        <form>
+
+            <div class="input-box">
+                <input type="email" id="email" required>
+                <label for="email">Email Address</label>
+            </div>
+
+            <button type="submit">Subscribe</button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

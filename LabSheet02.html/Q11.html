@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Form - CSS Specificity</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Internal CSS -->
+    <style>
+        /* Internal CSS */
+        body {
+            background-color: #eef2ff;
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h1 {
+            color: #2563eb;
+            text-align: center;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        /* Internal rule competing with external CSS */
+        .contact-form input {
+            border-color: green;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contact-form">
+
+        <h1>Contact Us</h1>
+
+        <form>
+
+            <label for="name">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                required
+            >
+
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+
+            <label for="message">
+                Message
+            </label>
+
+            <textarea
+                id="message"
+                name="message"
+                placeholder="Enter your message"
+                rows="5"
+                required
+            ></textarea>
+
+
+            <!-- Inline CSS -->
+            <button
+                type="submit"
+                style="
+                    background-color: #dc2626;
+                    color: white;
+                    padding: 14px 25px;
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                "
+            >
+                Send Message
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

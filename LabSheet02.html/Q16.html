@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Evaluation Form</title>
+
+    <style>
+        /* =========================
+           BASIC RESET
+        ========================== */
+
+        * {
+            box-sizing: border-box;
+
+            margin: 0;
+            padding: 0;
+
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================== */
+
+        body {
+            background-color: #f1f5f9;
+
+            padding: 30px;
+        }
+
+
+        /* =========================
+           FORM CONTAINER
+        ========================== */
+
+        .evaluation-container {
+            max-width: 800px;
+
+            margin: auto;
+
+            background-color: white;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.1);
+
+            /*
+             * Prevent floated elements
+             * from escaping the container.
+             */
+            overflow: hidden;
+        }
+
+
+        h1 {
+            text-align: center;
+
+            color: #1e293b;
+
+            margin-bottom: 10px;
+        }
+
+
+        .description {
+            text-align: center;
+
+            color: #64748b;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           FORM SECTION
+        ========================== */
+
+        .form-section {
+            border: 2px solid #e2e8f0;
+
+            border-radius: 8px;
+
+            padding: 20px;
+
+            margin-bottom: 25px;
+
+            overflow: hidden;
+        }
+
+
+        .form-section h2 {
+            color: #334155;
+
+            font-size: 18px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================
+           FLOAT COLUMNS
+        ========================== */
+
+        .form-group {
+            float: left;
+
+            width: 48%;
+
+            margin-right: 4%;
+
+            margin-bottom: 20px;
+        }
+
+
+        /*
+         * Every second group moves
+         * to the right side.
+         */
+        .form-group:nth-child(even) {
+            margin-right: 0;
+        }
+
+
+        /*
+         * CLEAR PROPERTY
+         *
+         * This forces the next section
+         * below all floated elements.
+         */
+        .clear {
+            clear: both;
+        }
+
+
+        /* =========================
+           LABELS
+        ========================== */
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #334155;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           INPUTS
+        ========================== */
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 2px solid #cbd5e1;
+
+            border-radius: 6px;
+
+            background-color: white;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition:
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+        }
+
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+
+            background-color: #eff6ff;
+        }
+
+
+        textarea {
+            min-height: 120px;
+
+            resize: vertical;
+        }
+
+
+        /* =========================
+           RATING SECTION
+        ========================== */
+
+        .rating-group {
+            float: left;
+
+            width: 48%;
+
+            margin-right: 4%;
+
+            margin-bottom: 15px;
+        }
+
+
+        .rating-group:nth-child(even) {
+            margin-right: 0;
+        }
+
+
+        .rating-options {
+            display: flex;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .rating-options label {
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            font-weight: normal;
+
+            cursor: pointer;
+        }
+
+
+        .rating-options input {
+            width: auto;
+
+            accent-color: #2563eb;
+        }
+
+
+        /* =========================
+           FULL WIDTH SECTION
+        ========================== */
+
+        .full-width {
+            float: none;
+
+            clear: both;
+
+            width: 100%;
+
+            margin-right: 0;
+        }
+
+
+        /* =========================
+           SUBMIT BUTTON
+        ========================== */
+
+        .submit-btn {
+            clear: both;
+
+            display: block;
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background-color: #2563eb;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease;
+        }
+
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+
+            transform: translateY(-2px);
+        }
+
+
+        .submit-btn:active {
+            background-color: #1e40af;
+
+            transform: translateY(1px);
+        }
+
+
+        /* =========================
+           SUCCESS MESSAGE
+        ========================== */
+
+        #successMessage {
+            display: none;
+
+            clear: both;
+
+            margin-top: 20px;
+
+            padding: 12px;
+
+            border-radius: 6px;
+
+            background-color: #dcfce7;
+
+            color: #166534;
+
+            text-align: center;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           MOBILE DESIGN
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+
+            .evaluation-container {
+                padding: 20px;
+            }
+
+
+            /*
+             * Remove the two-column float layout
+             * on small screens.
+             */
+            .form-group,
+            .rating-group {
+                float: none;
+
+                clear: both;
+
+                width: 100%;
+
+                margin-right: 0;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="evaluation-container">
+
+        <h1>Employee Evaluation Form</h1>
+
+        <p class="description">
+            Complete the evaluation based on the employee's
+            performance during the review period.
+        </p>
+
+
+        <form id="evaluationForm">
+
+            <!-- Employee Information -->
+
+            <div class="form-section">
+
+                <h2>Employee Information</h2>
+
+
+                <div class="form-group">
+
+                    <label for="employeeName">
+                        Employee Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="employeeName"
+                        name="employeeName"
+                        placeholder="Enter employee name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="employeeId">
+                        Employee ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="employeeId"
+                        name="employeeId"
+                        placeholder="Enter employee ID"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="department">
+                        Department
+                    </label>
+
+                    <select
+                        id="department"
+                        name="department"
+                        required
+                    >
+
+                        <option value="">
+                            Select department
+                        </option>
+
+                        <option value="IT">
+                            IT
+                        </option>
+
+                        <option value="HR">
+                            Human Resources
+                        </option>
+
+                        <option value="finance">
+                            Finance
+                        </option>
+
+                        <option value="marketing">
+                            Marketing
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="reviewDate">
+                        Review Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="reviewDate"
+                        name="reviewDate"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Clear floated fields -->
+                <div class="clear"></div>
+
+            </div>
+
+
+            <!-- Performance Evaluation -->
+
+            <div class="form-section">
+
+                <h2>Performance Evaluation</h2>
+
+
+                <div class="rating-group">
+
+                    <label>
+                        Quality of Work
+                    </label>
+
+                    <div class="rating-options">
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="quality"
+                                value="Excellent"
+                                required
+                            >
+                            Excellent
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="quality"
+                                value="Good"
+                            >
+                            Good
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="quality"
+                                value="Average"
+                            >
+                            Average
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="rating-group">
+
+                    <label>
+                        Communication
+                    </label>
+
+                    <div class="rating-options">
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="communication"
+                                value="Excellent"
+                                required
+                            >
+                            Excellent
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="communication"
+                                value="Good"
+                            >
+                            Good
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="communication"
+                                value="Average"
+                            >
+                            Average
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="rating-group">
+
+                    <label>
+                        Teamwork
+                    </label>
+
+                    <div class="rating-options">
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="teamwork"
+                                value="Excellent"
+                                required
+                            >
+                            Excellent
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="teamwork"
+                                value="Good"
+                            >
+                            Good
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="teamwork"
+                                value="Average"
+                            >
+                            Average
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="rating-group">
+
+                    <label>
+                        Leadership
+                    </label>
+
+                    <div class="rating-options">
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="leadership"
+                                value="Excellent"
+                                required
+                            >
+                            Excellent
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="leadership"
+                                value="Good"
+                            >
+                            Good
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="leadership"
+                                value="Average"
+                            >
+                            Average
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="clear"></div>
+
+            </div>
+
+
+            <!-- Comments -->
+
+            <div class="form-section">
+
+                <h2>Additional Comments</h2>
+
+
+                <div class="form-group full-width">
+
+                    <label for="comments">
+                        Manager's Comments
+                    </label>
+
+                    <textarea
+                        id="comments"
+                        name="comments"
+                        placeholder="Enter your comments..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="clear"></div>
+
+            </div>
+
+
+            <!-- Submit -->
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Submit Evaluation
+            </button>
+
+
+            <div id="successMessage">
+                Employee evaluation submitted successfully!
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <script>
+        const form =
+            document.getElementById("evaluationForm");
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+
+        form.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            successMessage.style.display = "block";
+
+        });
+    </script>
+
+</body>
+</html>

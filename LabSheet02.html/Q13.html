@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Custom Checkboxes and Radio Buttons</title>
+
+    <style>
+        /* =========================
+           BASIC RESET
+        ========================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* =========================
+           PAGE
+        ========================== */
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #f1f5f9;
+
+            padding: 30px;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================== */
+
+        .form-container {
+            width: 100%;
+            max-width: 550px;
+
+            background-color: white;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+
+            color: #1e293b;
+
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+
+            color: #64748b;
+
+            margin-bottom: 25px;
+        }
+
+        /* =========================
+           GROUPS
+        ========================== */
+
+        .option-group {
+            margin-bottom: 25px;
+
+            padding: 20px;
+
+            border: 2px solid #e2e8f0;
+
+            border-radius: 8px;
+        }
+
+        .option-group h2 {
+            color: #334155;
+
+            font-size: 18px;
+
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+           CUSTOM OPTION
+        ========================== */
+
+        .custom-option {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+
+            margin-bottom: 14px;
+
+            cursor: pointer;
+
+            color: #334155;
+        }
+
+        /*
+         * Hide the original checkbox/radio.
+         * It remains available to keyboard users.
+         */
+        .custom-option input {
+            position: absolute;
+
+            opacity: 0;
+
+            width: 0;
+            height: 0;
+        }
+
+        /* =========================
+           CUSTOM CHECKBOX / RADIO
+        ========================== */
+
+        .custom-control {
+            position: relative;
+
+            width: 22px;
+            height: 22px;
+
+            margin-right: 12px;
+
+            border: 2px solid #94a3b8;
+
+            background-color: white;
+
+            transition:
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+        }
+
+        /* Make checkbox square */
+        .checkbox .custom-control {
+            border-radius: 5px;
+        }
+
+        /* Make radio circular */
+        .radio .custom-control {
+            border-radius: 50%;
+        }
+
+        /* =========================
+           ::BEFORE PSEUDOELEMENT
+        ========================== */
+
+        /*
+         * ::before creates the check mark.
+         */
+        .checkbox .custom-control::before {
+            content: "";
+
+            position: absolute;
+
+            width: 5px;
+            height: 10px;
+
+            left: 7px;
+            top: 3px;
+
+            border-right: 3px solid white;
+            border-bottom: 3px solid white;
+
+            transform: rotate(45deg) scale(0);
+
+            transition: transform 0.2s ease;
+        }
+
+        /* =========================
+           CHECKBOX ~ SELECTOR
+        ========================== */
+
+        /*
+         * When the checkbox is checked,
+         * style its following sibling.
+         *
+         * input:checked ~ .custom-control
+         */
+        .checkbox input:checked ~ .custom-control {
+            background-color: #2563eb;
+
+            border-color: #2563eb;
+        }
+
+        /*
+         * Show the check mark when checked.
+         */
+        .checkbox input:checked ~ .custom-control::before {
+            transform: rotate(45deg) scale(1);
+        }
+
+        /* =========================
+           RADIO ::AFTER
+        ========================== */
+
+        /*
+         * ::after creates the inner circle.
+         */
+        .radio .custom-control::after {
+            content: "";
+
+            position: absolute;
+
+            width: 10px;
+            height: 10px;
+
+            left: 4px;
+            top: 4px;
+
+            border-radius: 50%;
+
+            background-color: white;
+
+            transform: scale(0);
+
+            transition: transform 0.2s ease;
+        }
+
+        /*
+         * When radio is selected,
+         * style its following sibling.
+         */
+        .radio input:checked ~ .custom-control {
+            background-color: #2563eb;
+
+            border-color: #2563eb;
+        }
+
+        /*
+         * Display the inner radio circle.
+         */
+        .radio input:checked ~ .custom-control::after {
+            transform: scale(1);
+        }
+
+        /* =========================
+           HOVER EFFECT
+        ========================== */
+
+        .custom-option:hover .custom-control {
+            border-color: #2563eb;
+        }
+
+        /* =========================
+           KEYBOARD FOCUS
+        ========================== */
+
+        .custom-option input:focus-visible ~ .custom-control {
+            outline: 3px solid rgba(37, 99, 235, 0.25);
+
+            outline-offset: 2px;
+        }
+
+        /* =========================
+           SUBMIT BUTTON
+        ========================== */
+
+        .submit-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background-color: #2563eb;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.3s ease,
+                transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            background-color: #1e40af;
+
+            transform: translateY(1px);
+        }
+
+        /* Success message */
+        #successMessage {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 12px;
+
+            background-color: #dcfce7;
+
+            color: #166534;
+
+            border-radius: 6px;
+
+            text-align: center;
+
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h1>Preferences</h1>
+
+        <p class="description">
+            Select your preferred options.
+        </p>
+
+        <form id="preferencesForm">
+
+            <!-- CHECKBOXES -->
+
+            <div class="option-group">
+
+                <h2>Select Your Interests</h2>
+
+                <label class="custom-option checkbox">
+
+                    <input
+                        type="checkbox"
+                        name="interest"
+                        value="technology"
+                    >
+
+                    <span class="custom-control"></span>
+
+                    Technology
+
+                </label>
+
+
+                <label class="custom-option checkbox">
+
+                    <input
+                        type="checkbox"
+                        name="interest"
+                        value="sports"
+                    >
+
+                    <span class="custom-control"></span>
+
+                    Sports
+
+                </label>
+
+
+                <label class="custom-option checkbox">
+
+                    <input
+                        type="checkbox"
+                        name="interest"
+                        value="music"
+                    >
+
+                    <span class="custom-control"></span>
+
+                    Music
+
+                </label>
+
+
+                <label class="custom-option checkbox">
+
+                    <input
+                        type="checkbox"
+                        name="interest"
+                        value="travel"
+                    >
+
+                    <span class="custom-control"></span>
+
+                    Travel
+
+                </label>
+
+            </div>
+
+
+            <!-- RADIO BUTTONS -->
+
+            <div class="option-group">
+
+                <h2>Preferred Contact Method</h2>
+
+                <label class="custom-option radio">
+
+                    <input
+                        type="radio"
+                        name="contact"
+                        value="email"
+                        required
+                    >
+
+                    <span class="custom-control"></span>
+
+                    Email
+
+                </label>
+
+
+                <label class="custom-option radio">
+
+                    <input
+                        type="radio"
+                        name="contact"
+                        value="phone"
+                    >
+
+                    <span class="custom-control"></span>
+
+                    Phone
+
+                </label>
+
+
+                <label class="custom-option radio">
+
+                    <input
+                        type="radio"
+                        name="contact"
+                        value="sms"
+                    >
+
+                    <span class="custom-control"></span>
+
+                    SMS
+
+                </label>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Save Preferences
+            </button>
+
+        </form>
+
+
+        <div id="successMessage">
+            Preferences saved successfully!
+        </div>
+
+    </div>
+
+
+    <script>
+        const form =
+            document.getElementById("preferencesForm");
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+        form.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            successMessage.style.display = "block";
+
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: hsl(210, 12%, 93%);
+    color: hsl(335, 92%, 5%);
+}
+
+.form-container {
+    width: 450px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgb(166, 225, 234);
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+label,
+select,
+textarea,
+input[type="text"],
+input[type="password"] {
+    display: block;
+    width: 100%;
+}
+
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+    margin: 8px 0 18px;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
