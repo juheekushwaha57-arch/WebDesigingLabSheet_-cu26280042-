@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Bookstore - Home</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background: #333; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; }
+        .banner { background: #007bff; color: white; text-align: center; padding: 50px; }
+        .books-grid { display: flex; gap: 20px; padding: 20px; justify-content: center; }
+        .book-card { border: 1px solid #ddd; padding: 15px; width: 200px; text-align: center; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>BookStore</h2>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Categories</a>
+            <a href="#">Cart</a>
+        </nav>
+    </header>
+    <div class="banner">
+        <h1>Welcome to Online Bookstore</h1>
+        <input type="text" placeholder="Search books..." style="padding: 8px; width: 300px;">
+    </div>
+    <div class="books-grid">
+        <div class="book-card"><h3>Book Title 1</h3><p>$15.00</p><button>Add to Cart</button></div>
+        <div class="book-card"><h3>Book Title 2</h3><p>$20.00</p><button>Add to Cart</button></div>
+    </div>
+</body>
+</html>
