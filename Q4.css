@@ -1,0 +1,114 @@
+
+/* Q4: MODERN WEB DESIGN PRINCIPLES */
+
+/* 1. Consistent color palette */
+
+:root {
+    --primary-color: #315c42;
+    --secondary-color: #e5efdf;
+    --accent-color: #d6a85f;
+    --dark-color: #1e3326;
+    --light-color: #f8faf6;
+    --text-color: #26372b;
+}
+
+/* 2. Typography */
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-color);
+}
+
+/* Heading typography */
+
+h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: bold;
+}
+
+h2 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    color: var(--primary-color);
+}
+
+h3 {
+    font-size: 1.3rem;
+    color: var(--dark-color);
+}
+
+/* 3. White space management */
+
+section {
+    padding: 60px 5%;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+/* 4. Consistent buttons */
+
+.btn {
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+    padding: 12px 25px;
+    border-radius: 6px;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* 5. Modern card design */
+
+.service-card,
+.review-card,
+.team-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover,
+.review-card:hover,
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 6. Consistent images */
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 7. Section backgrounds */
+
+.about-section {
+    background-color: var(--secondary-color);
+}
+
+.menu-section {
+    background-color: var(--light-color);
+}
+
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+

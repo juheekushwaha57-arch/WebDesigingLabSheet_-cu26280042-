@@ -1,0 +1,276 @@
+
+/* GENERAL STYLING */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8faf6;
+    color: #26372b;
+    line-height: 1.6;
+}
+
+/* COLOR PALETTE */
+
+:root {
+    --primary: #315c42;
+    --secondary: #e5efdf;
+    --accent: #d6a85f;
+    --dark: #1e3326;
+    --white: #ffffff;
+}
+
+/* ACCESSIBILITY */
+
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 10px;
+    background: white;
+    color: black;
+    padding: 10px;
+}
+
+.skip-link:focus {
+    top: 10px;
+}
+
+a:focus-visible {
+    outline: 3px solid #9a6500;
+    outline-offset: 3px;
+}
+
+/* NAVIGATION */
+
+header {
+    background-color: var(--primary);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+}
+
+.logo {
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* HERO SECTION */
+
+.hero {
+    background:
+    linear-gradient(rgba(0,0,0,0.5),
+                    rgba(0,0,0,0.5)),
+    url("images/cafe.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    height: 500px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 15px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--accent);
+    color: var(--dark);
+    padding: 12px 25px;
+    text-decoration: none;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+/* GENERAL SECTIONS */
+
+.section {
+    padding: 60px 6%;
+    text-align: center;
+}
+
+.section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+/* ABOUT SECTION */
+
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.about-container img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* SERVICES */
+
+.service-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.service-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #00000015;
+}
+
+.service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* TEAM */
+
+.team-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.team-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* REVIEWS */
+
+.review-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.review-card {
+    background: var(--secondary);
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.review-card p:first-of-type {
+    color: #805500;
+    font-size: 22px;
+}
+
+/* CONTACT */
+
+#contact {
+    background: var(--secondary);
+}
+
+/* FOOTER */
+
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .about-container {
+        grid-template-columns: 1fr;
+    }
+
+    .service-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .review-container {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .service-container {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .section {
+        padding: 40px 5%;
+    }
+
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}
+
